@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import bootstrap from "bootstrap/dist/css/bootstrap.css";
 
 export default function ToDo() {
   const [task, setTask] = useState("");
