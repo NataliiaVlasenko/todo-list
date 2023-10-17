@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import DeleteTaskButton from './DeleteTaskButton';
+import TaskTitle from './TaskTitle';
 
 export default function ToDo() {
   const [task, setTask] = useState("");
@@ -18,11 +20,13 @@ export default function ToDo() {
     setTasks(deleted);
     localStorage.setItem("localTasks", JSON.stringify(deleted))
 }
+ 
 
 const handleClear=()=>{
   setTasks([]);
   localStorage.removeItem("localTasks");
 }
+
   return (
     <div className="container row">
       <h1 className="mt-3 text-white">Purchases list</h1>
@@ -55,23 +59,14 @@ const handleClear=()=>{
           ? ` ${tasks.length} purchases`
           : null}
       </div>
+
       {tasks.map((task) => (
         <React.Fragment key={task.id}>
-            <div className="col-11">
-                <span className = "form-control bg-white btn mt-2"
-                style={{textAlign: "left", fontWeight: "bold"}}>
-                    {task.title}
-                </span>
-            </div>
-
-            <div className="col-1">
-                <button
-                className =" mt-2 btn btn-warning material-icons"
-                onClick ={()=> handleDelete(task)}
-                >delete</button>
-            </div>
+          <TaskTitle task = {task}/>
+          <DeleteTaskButton onClick = {()=>handleDelete(task)}/>
         </React.Fragment>
       ))}
+
 {!tasks.length ? null:(
           <div>
               <button className= "btn btn-secondary  mt-4 mb-4" onClick={()=>handleClear()}>
