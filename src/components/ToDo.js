@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import DeleteTaskButton from './DeleteTaskButton';
-import TaskTitle from './TaskTitle';
+import DeleteTaskButton from "./DeleteTaskButton";
+import TaskTitle from "./TaskTitle";
+import Badge from "./Badge";
 
 export default function ToDo() {
   const [task, setTask] = useState("");
@@ -15,17 +16,16 @@ export default function ToDo() {
     }
   };
 
-  const handleDelete = (task)=>{
-    const deleted = tasks.filter((t)=>t.id !== task.id);
+  const handleDelete = (task) => {
+    const deleted = tasks.filter((t) => t.id !== task.id);
     setTasks(deleted);
-    localStorage.setItem("localTasks", JSON.stringify(deleted))
-}
- 
+    localStorage.setItem("localTasks", JSON.stringify(deleted));
+  };
 
-const handleClear=()=>{
-  setTasks([]);
-  localStorage.removeItem("localTasks");
-}
+  const handleClear = () => {
+    setTasks([]);
+    localStorage.removeItem("localTasks");
+  };
 
   return (
     <div className="container row">
@@ -43,36 +43,32 @@ const handleClear=()=>{
       </div>
 
       <div className="col-3">
-        <button className=" btn btn-primary form-control material-icons" onClick={addTask}>
+        <button
+          className=" btn btn-primary form-control material-icons"
+          onClick={addTask}
+        >
           add
         </button>
       </div>
 
-     
-      <div className="badge badge-light">
-        You have
-        {!tasks.length
-          ? " nothing to buy"
-          : tasks.length === 1
-          ? " 1 purchase"
-          : tasks.length > 1
-          ? ` ${tasks.length} purchases`
-          : null}
-      </div>
+      <Badge tasks={tasks} />
 
       {tasks.map((task) => (
         <React.Fragment key={task.id}>
-          <TaskTitle task = {task}/>
-          <DeleteTaskButton onClick = {()=>handleDelete(task)}/>
+          <TaskTitle task={task} />
+          <DeleteTaskButton onClick={() => handleDelete(task)} />
         </React.Fragment>
       ))}
 
-{!tasks.length ? null:(
-          <div>
-              <button className= "btn btn-secondary  mt-4 mb-4" onClick={()=>handleClear()}>
-                  Clear
-              </button>
-          </div>
+      {!tasks.length ? null : (
+        <div>
+          <button
+            className="btn btn-secondary  mt-4 mb-4"
+            onClick={() => handleClear()}
+          >
+            Clear
+          </button>
+        </div>
       )}
     </div>
   );
