@@ -4,12 +4,28 @@ import TaskTitle from "./TaskTitle";
 import Badge from "./Badge";
 
 export default function ToDo() {
+  
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
 
+  const today = new Date();
+
+  const dateFormatOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+
   const addTask = (e) => {
     if (task) {
-      const newTask = { id: new Date().getTime().toString(), title: task };
+      const newTask = { id: today.getDate().toString, title: task , date: new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate()
+      ).toLocaleDateString("ua-UA", dateFormatOptions)};
+
       setTasks([...tasks, newTask]);
       localStorage.setItem("localTasks", JSON.stringify([...tasks, newTask]));
       setTask("");

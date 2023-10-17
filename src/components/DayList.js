@@ -30,7 +30,7 @@ export default function DayList() {
   return (
     <ul className="container row">
       {days.map((day, index) => (
-        <DayCard key={index} day={day}></DayCard>
+        <DayCard key={index} day={day}/>
       ))}
     </ul>
   );
