@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DeleteTaskButton from "./DeleteTaskButton";
 import TaskTitle from "./TaskTitle";
 import Badge from "./Badge";
@@ -7,6 +7,13 @@ export default function ToDo() {
   
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
+
+  useEffect(()=>{
+    if(localStorage.getItem("localTasks")){
+        const storedList = JSON.parse(localStorage.getItem("localTasks"));
+        setTasks(storedList);
+    }
+},[])
 
   const today = new Date();
 
