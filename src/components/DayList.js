@@ -27,10 +27,11 @@ export default function DayList() {
   };
 
   const days = getNextSevenDays();
+
   return (
     <ul className="container row">
       {days.map((day, index) => (
-        <DayCard key={index} day={day}/>
+        <DayCard key={index} day={day} />
       ))}
     </ul>
   );
